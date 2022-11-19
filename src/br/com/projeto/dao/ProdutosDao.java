@@ -236,5 +236,67 @@ public class ProdutosDao {
         
         
     }
+      
+      //Método de baixa no estoque
+      public void baixarEstoque (int id, int qtd_nova) {
+          try {
+              String sql = "update tb_produtos set qtd_estoque = ? where id=?";
+              
+              PreparedStatement stmt = con.prepareStatement(sql);
+              
+              stmt.setInt(1, qtd_nova);
+              stmt.setInt(2, id);
+              
+              stmt.execute();
+              stmt.close();
+              
+              
+          } catch (Exception erro) {
+              JOptionPane.showMessageDialog(null, "Erro " + erro);
+          }
+      }
+      
+      //Método para retornar o estoque atual - consulta
+      public int retornarEstoque(int id){
+          try {
+              int qtd_estoque = 0;
+              
+              String sql = "Select qtd_estoque from tb_produtos where id = ?";
+              
+              PreparedStatement stmt = con.prepareStatement(sql);
+              stmt.setInt(1,id);
+              
+              ResultSet rs = stmt.executeQuery();
+              
+              if(rs.next()){
+
+                  qtd_estoque = (rs.getInt("qtd_estoque"));
+              
+              }
+              return qtd_estoque;
+              
+          } catch (SQLException erro) {
+              throw new RuntimeException(erro);
+          }
+      }
+      
+       //Método de baixa no estoque
+      public void adicionarEstoque (int id, int qtd_nova) {
+          try {
+              String sql = "update tb_produtos set qtd_estoque = ? where id=?";
+              
+              PreparedStatement stmt = con.prepareStatement(sql);
+              
+              stmt.setInt(1, qtd_nova);
+              stmt.setInt(2, id);
+              
+              stmt.execute();
+              stmt.close();
+              
+              
+          } catch (Exception erro) {
+              JOptionPane.showMessageDialog(null, "Erro " + erro);
+          }
+      }
     
 }

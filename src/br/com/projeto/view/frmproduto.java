@@ -81,17 +81,20 @@ public class frmproduto extends javax.swing.JFrame {
         BtnEditar = new javax.swing.JButton();
         BtnExcluir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Produtos");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(169, 199, 208));
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setFont(new java.awt.Font("Lucida Bright", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel1.setBackground(new java.awt.Color(0, 0, 102));
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 102));
         jLabel1.setText("Cadastro de Produtos");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -99,19 +102,19 @@ public class frmproduto extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(231, 231, 231)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
                 .addComponent(jLabel1)
-                .addGap(36, 36, 36))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
-        PainelEdicao.setBackground(new java.awt.Color(204, 204, 255));
+        PainelEdicao.setBackground(new java.awt.Color(199, 223, 226));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Código Produto:");
@@ -246,7 +249,7 @@ public class frmproduto extends javax.swing.JFrame {
 
         PainelDeAbas.addTab("Dados do Produto", PainelEdicao);
 
-        PainelBusca.setBackground(new java.awt.Color(204, 204, 255));
+        PainelBusca.setBackground(new java.awt.Color(199, 223, 226));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel16.setText("Descrição:");
@@ -311,8 +314,8 @@ public class frmproduto extends javax.swing.JFrame {
                     .addComponent(CxConsultaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnConsultarProduto))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 104, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         PainelDeAbas.addTab("Consultar Produtos", PainelBusca);
@@ -660,7 +663,7 @@ public class frmproduto extends javax.swing.JFrame {
     private javax.swing.JTextField CxCodigo;
     private javax.swing.JTextField CxConsultaProduto;
     private javax.swing.JPanel PainelBusca;
-    private javax.swing.JTabbedPane PainelDeAbas;
+    public javax.swing.JTabbedPane PainelDeAbas;
     private javax.swing.JPanel PainelEdicao;
     private javax.swing.JTable TabelaProdutos;
     private javax.swing.JComboBox boxFornecedor;

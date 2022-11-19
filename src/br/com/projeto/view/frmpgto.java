@@ -1,7 +1,11 @@
 package br.com.projeto.view;
 
+import br.com.projeto.dao.ItemVendaDao;
+import br.com.projeto.dao.ProdutosDao;
 import br.com.projeto.dao.VendasDao;
 import br.com.projeto.model.Cliente;
+import br.com.projeto.model.ItensVenda;
+import br.com.projeto.model.Produto;
 import br.com.projeto.model.Vendas;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -68,10 +72,13 @@ public class frmpgto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela pagamento");
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 153));
-        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setBackground(new java.awt.Color(199, 223, 226));
 
-        jLabel1.setFont(new java.awt.Font("Lucida Bright", 1, 36)); // NOI18N
+        jPanel2.setBackground(new java.awt.Color(169, 199, 208));
+        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel1.setBackground(new java.awt.Color(0, 0, 102));
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 51));
         jLabel1.setText("Pagamentos");
 
@@ -314,7 +321,7 @@ public class frmpgto extends javax.swing.JFrame {
         
         Vendas obj_vendas = new Vendas();
         
-        JOptionPane.showMessageDialog(null,"Cliente " + client.getId());
+        //JOptionPane.showMessageDialog(null,"Cliente " + client.getId());
 
         //dados do cliente
         obj_vendas.setCliente(client);
@@ -335,6 +342,46 @@ public class frmpgto extends javax.swing.JFrame {
         
         VendasDao dao_vendas = new VendasDao();
         dao_vendas.cadastroDeVenda(obj_vendas);
+        
+        //retornar o id da venda
+        obj_vendas.setId(dao_vendas.retornaVenda());
+        
+        //System.out.println("Id da ultima venda = " + obj_vendas.getId());
+        
+        //cadastrar dados da venda no bd
+        for(int i = 0; i<listacompras.getRowCount(); i++){
+            
+            int qtd_estoque, qtd_adquirida, qtd_atualizada;
+            ProdutosDao dao_produto = new ProdutosDao();
+            
+            Produto obj_produto = new Produto();
+            
+            ItensVenda item = new ItensVenda();
+            
+            item.setVenda(obj_vendas);
+            //seleciona a linha
+            obj_produto.setId(Integer.parseInt(listacompras.getValueAt(i, 0).toString()));
+            item.setProduto(obj_produto);
+            item.setQtd(Integer.parseInt(listacompras.getValueAt(i, 2).toString()));
+            item.setSubtotal(Double.parseDouble(listacompras.getValueAt(i, 4).toString()));
+            
+            //Baixa do estoque
+            qtd_estoque = dao_produto.retornarEstoque(obj_produto.getId());
+            qtd_adquirida = Integer.parseInt(listacompras.getValueAt(i, 2).toString());
+            qtd_atualizada = qtd_estoque - qtd_adquirida;
+            
+            dao_produto.baixarEstoque(obj_produto.getId(), qtd_atualizada);
+            
+            ItemVendaDao daoItem = new ItemVendaDao();
+            daoItem.cadastraItem(item);
+            
+             
+        }
+        
+        JOptionPane.showMessageDialog(null,"Venda registrada.");
+        ///abre o pdv novamente
+         this.dispose();
+        
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
     private void cxDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxDinheiroActionPerformed

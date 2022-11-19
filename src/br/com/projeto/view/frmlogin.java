@@ -10,11 +10,11 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author edoom
+ * @author Edersom Denir Giacomelli
  */
 public class frmlogin extends javax.swing.JFrame {
 
-    /**
+    /**z
      * Creates new form frmlogin
      */
     public frmlogin() {
@@ -44,11 +44,11 @@ public class frmlogin extends javax.swing.JFrame {
         setTitle("Bem vindo - Login.");
         setBackground(new java.awt.Color(255, 255, 204));
 
-        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBackground(new java.awt.Color(169, 199, 208));
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
         jLabel1.setText("Tela de Login");
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/login.png"))); // NOI18N
@@ -58,26 +58,29 @@ public class frmlogin extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(118, 118, 118)
+                .addGap(77, 77, 77)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel1))
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel4)))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
-        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel2.setText("CPF:");
 
-        jLabel3.setFont(new java.awt.Font("Comic Sans MS", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
         jLabel3.setText("SENHA:");
 
         cxSenhaLogin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -96,7 +99,7 @@ public class frmlogin extends javax.swing.JFrame {
         }
         cxLogin.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        btnLogin.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnLogin.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/entrar.png"))); // NOI18N
         btnLogin.setText("Entrar");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -105,9 +108,14 @@ public class frmlogin extends javax.swing.JFrame {
             }
         });
 
-        btnLogoff.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        btnLogoff.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         btnLogoff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/sair_1.png"))); // NOI18N
         btnLogoff.setText("Sair");
+        btnLogoff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoffActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -167,8 +175,11 @@ public class frmlogin extends javax.swing.JFrame {
         // Botão Login
         try {
             String cpf, senha;
-            cpf = cxLogin.getText();
-            senha = cxSenhaLogin.getText();
+            //cpf = cxLogin.getText();
+            //senha = cxSenhaLogin.getText();
+            
+            cpf = "111.111.111-11";
+            senha = "1234";
             
             FuncionarioDao dao = new FuncionarioDao();
             dao.acessarSistema(cpf, senha);
@@ -177,9 +188,23 @@ public class frmlogin extends javax.swing.JFrame {
             this.dispose();
             
         } catch (Exception erro) {
-            JOptionPane.showMessageDialog(null, "Erro");
+            JOptionPane.showMessageDialog(null, "Erro: " + erro);
+           
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnLogoffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoffActionPerformed
+        // Botão sair da tela
+        
+        int msg;
+        
+        msg = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?");
+        
+        if(msg ==0){
+            System.exit(0);
+        }
+        
+    }//GEN-LAST:event_btnLogoffActionPerformed
 
     /**
      * @param args the command line arguments
